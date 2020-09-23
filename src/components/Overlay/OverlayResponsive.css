@@ -1,0 +1,25 @@
+@media screen and (min-width: 320px) and (max-width: 767px) {
+#overlay .overlay-body {
+    margin: 3%;
+    width: 94%;
+    padding: 10px;
+}
+
+#product-description .desc-right {
+    margin: 0;
+    padding: 10px;
+}
+
+#product-description .img-wrapper {
+    width: 250px;
+}
+
+#overlay .freetrial-sel {
+    width: 100%;
+}
+
+#FreeTrial .input-container .input-groups {
+    width: 100% !important;
+
+}
+}

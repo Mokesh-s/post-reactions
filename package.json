@@ -1,0 +1,20 @@
+{
+  "name": "mokesh_post_reactions",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "cross-fetch": "^3.0.6",
+    "node-sass": "^4.14.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-reveal": "^1.2.2",
+    "react-scripts": "1.0.17",
+    "react-tooltip": "^4.2.10"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

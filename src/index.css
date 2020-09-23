@@ -1,0 +1,372 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: #e9eaed;
+  /* font-family: arial, sans-serif; */
+  font-family: 'IBM Plex Sans', sans-serif !important;
+}
+
+.text-desc, [class*="reaction-"], .field-reactions, .field-reactions:checked:focus ~ .text-desc {
+  /* clip: rect(1px, 1px, 1px, 1px); */
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.field-reactions:focus ~ .text-desc, .box:hover [class*="reaction-"], .field-reactions:checked ~ [class*="reaction-"] {
+  clip: auto;
+  overflow: visible;
+  opacity: 1;
+}
+
+.main-title {
+  background: #3a5795;
+  padding: 10px;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.text-desc {
+  font-weight: normal;
+  text-align: center;
+  transform: translateY(-50px);
+  white-space: nowrap;
+  font-size: 13px;
+  width: 100%;
+}
+
+[class*="reaction-"] {
+  border: none;
+  background-image: url(/assets/images/facebook-reactions.png);
+  background-color: transparent;
+  display: block;
+  cursor: pointer;
+  height: 48px;
+  position: absolute;
+  width: 48px;
+  z-index: 11;
+  top: -28;
+  transform-origin: 50% 100%;
+  /* transform: scale(0.1); */
+  /* transform: scale(1); */
+  /* transition: all 0.3s; */
+  outline: none;
+  /* will-change: transform; */
+  /* opacity: 0; */
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post {
+  /* position: absolute; */
+  /* left: calc(50% - 150px); */
+  /* top: calc(50% - 50px); */
+  width: fit-content;
+}
+
+.box {
+  position: absolute;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9;
+  visibility: hidden;
+}
+
+.field-reactions:focus ~ .label-reactions {
+  border-color: rgba(88, 144, 255, 0.3);
+}
+.field-reactions:checked:focus ~ .label-reactions {
+  border-color: transparent;
+}
+
+.label-reactions {
+  /* background: url(https://cdn4.iconfinder.com/data/icons/facebook-likes/100/1.png) no-repeat 0 0; */
+  border: 2px dotted transparent;
+  display: block;
+  /* height: 100px; */
+  margin: 0 auto;
+  /* width: 100px; */
+  /* color: transparent; */
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.react-count {
+  width: 300px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.toolbox {
+  background: #fff;
+  height: 52px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.15);
+  width: 300px;
+  border-radius: 40px;
+  top: -30px;
+  left: 0;
+  position: absolute;
+  /* visibility: hidden; */
+  /* opacity: 0; */
+  transition: opacity 0.15s;
+}
+
+.legend-reaction {
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #fff;
+  display: inline-block;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  font-weight: bold;
+  line-height: 20px;
+  max-width: 100%;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 6px;
+  transition: opacity 50ms ease;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  top: -28px;
+  transform: translateX(-50%);
+}
+
+.box:hover [class*="reaction-"] {
+  transform: scale(0.8) translateY(-40px);
+}
+.box:hover [class*="reaction-"]:hover, .box:hover [class*="reaction-"]:focus {
+  transition: all 0.2s ease-in;
+  transform: scale(1) translateY(-35px);
+}
+.box:hover [class*="reaction-"]:hover .legend-reaction, .box:hover [class*="reaction-"]:focus .legend-reaction {
+  opacity: 1;
+}
+.box:hover .toolbox {
+  opacity: 1;
+}
+.box:hover .toolbox {
+  visibility: visible;
+}
+.reaction-love {
+  transition-delay: 0.06s;
+}
+.reaction-haha {
+  transition-delay: 0.09s;
+}
+.reaction-wow {
+  transition-delay: 0.12s;
+}
+.reaction-sad {
+  transition-delay: 0.15s;
+}
+.reaction-angry {
+  transition-delay: 0.18s;
+}
+
+.field-reactions:checked ~ [class*="reaction-"] {
+  transform: scale(0.8) translateY(-40px);
+}
+.field-reactions:checked ~ [class*="reaction-"]:hover, .field-reactions:checked ~ [class*="reaction-"]:focus {
+  transition: all 0.2s ease-in;
+  transform: scale(1) translateY(-35px);
+}
+.field-reactions:checked ~ [class*="reaction-"]:hover .legend-reaction, .field-reactions:checked ~ [class*="reaction-"]:focus .legend-reaction {
+  opacity: 1;
+}
+.field-reactions:checked ~ .toolbox {
+  opacity: 1;
+}
+.field-reactions:checked ~ .toolbox,
+.field-reactions:checked ~ .overlay {
+  visibility: visible;
+}
+.field-reactions:checked ~ .reaction-love {
+  transition-delay: 0.03s;
+}
+.field-reactions:checked ~ .reaction-haha {
+  transition-delay: 0.09s;
+}
+.field-reactions:checked ~ .reaction-wow {
+  transition-delay: 0.12s;
+}
+.field-reactions:checked ~ .reaction-sad {
+  transition-delay: 0.15s;
+}
+.field-reactions:checked ~ .reaction-angry {
+  transition-delay: 0.18s;
+}
+
+.reaction-like {
+  left: 0;
+  background-position: 0 -144px;
+  transform: scale(0.8);
+  transition: all .3s ease;
+}
+
+.like-item {
+  height: 16px;
+  width: 16px;
+  margin: 8px;
+  transform: scale(1);
+  transition: all .3s ease;
+  cursor: pointer;
+  transition-delay: 0.06s;
+}
+
+.like-item:hover {
+  transform: scale(2);
+}
+
+.reaction-love {
+  background-position: -48px 0;
+  left: 50px;
+}
+
+.reaction-haha {
+  background-position: -96px 0;
+  /* left: 50px; */
+  left: 100px;
+  
+}
+
+.reaction-wow {
+  background-position: -144px 0;
+  left: 150px;
+  
+}
+
+.reaction-sad {
+  background-position: -192px 0;
+  left: 200px;
+  
+}
+
+.reaction-angry {
+  background-position: -240px 0;
+  left: 250px;
+}
+
+#summary {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  border: 1px solid;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.emoji-images {
+  cursor: pointer;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  margin-left: -5px;
+  padding: 2px;
+}
+
+.count {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid;
+}
+
+.user-list {
+  background: #fff;
+  height: fit-content;
+  width: fit-content;
+  position: absolute;
+  margin: 5px;
+  padding: 5px;
+  display: none;
+  z-index: 2;
+}
+
+.user-name {
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+}
+
+.displayClass {
+  display: block;
+}
+
+.displayFlex {
+  display: flex !important;
+}
+
+.box-1 {
+  /* position: relative; */
+  /* padding-top: 30px; */
+  width: 300px;
+  text-align: center;
+}
+
+.reactions-container {
+  background: #ffff;
+  display: flex;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  border-radius: 5px;
+  bottom: 35px;
+  width: 300px;
+  box-sizing: border-box;
+  height: 32px;
+  align-items: center;
+  border-radius: 24px;
+  padding: 0 12px;
+}
+
+.like-items {
+  height: 32px;
+  margin: 5px 0;
+}
+
+.like-button {
+  cursor: pointer;
+  width: 300px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  /* margin-top: 40px; */
+  /* padding: 0 5px 5px; */
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.like-button:hover {
+  background: #fff;
+}
+
+/* tooltip css */
+.__react_component_tooltip {
+  background: #161616 !important;
+  border-radius: 100px !important;
+  height: 24px !important;
+  padding: 4px 8px !important;
+  font-size: 12px !important;
+  font-family: 'IBM Plex Sans', sans-serif !important;
+}
+
+/* .reaction-buttons {
+  padding: 0 5px;
+} */
