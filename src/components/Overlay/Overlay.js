@@ -10,7 +10,8 @@ class Overlay extends Component {
     super(props)
     this.state = {
       userReactList: [],
-      show: false
+      show: false,
+      selectedTab: ''
     }
     this.handleAnimation = this.handleAnimation.bind(this)
     this.delayHandle = this.delayHandle.bind(this)
@@ -67,7 +68,7 @@ class Overlay extends Component {
 
   handleOpenDialog (id) {
     const { individualReacts, allUsers, contentId } = this.props
-    let userReactList = []
+    const userReactList = []
     if (id) {
       individualReacts[id].map((element, index) => {
         allUsers.map((user, index) => {
@@ -77,24 +78,21 @@ class Overlay extends Component {
           }
         })
       })
-      this.setState({ userReactList: userReactList })
+      this.setState({ userReactList: userReactList, selectedTab: id })
     } else {
       // userReactList = allUsers
       const reqRoute = `user_content_reactions?content_id=${contentId}`
       fetchData('get', reqRoute, '', 'json').then(response => { // getting individual id responses
-        console.log(response, allUsers)
         if (response.length > 0) {
           response.map((element) => {
             allUsers.map((user) => {
               if (element.user_id === user.id) {
                 userReactList.push(user)
-                console.log(element, user)
               }
             })
           })
         }
-        this.setState({ userReactList: userReactList })
-        console.log(userReactList)
+        this.setState({ userReactList: userReactList, selectedTab: 'all' })
       })
     }
   }
@@ -102,7 +100,7 @@ class Overlay extends Component {
   render () {
     // const component = this.componentName()
     const { individualIds, individualReacts } = this.props
-    const { userReactList } = this.state
+    const { userReactList, selectedTab } = this.state
     // console.log(userReactList)
     // individualIds.unshift({ id: 0, name: 'All', emoji: 'All' })
     return (
@@ -118,7 +116,10 @@ class Overlay extends Component {
               </div>
               <div className='details-tabs'>
                 <div className='emoji-container'>
-                  <div className='emoji-img' onClick={() => this.handleOpenDialog()}>
+                  <div
+                    className={(selectedTab === 'all') ? 'emoji-img active' : 'emoji-img'}
+                    onClick={() => this.handleOpenDialog()}
+                  >
                     All
                   </div>
                   {individualIds && individualIds.map((element, index) => {
@@ -126,9 +127,10 @@ class Overlay extends Component {
                       <div
                         key={index}
                         onClick={() => this.handleOpenDialog(element.id)}
-                        // onMouseLeave={() => this.handleCloseDialog(`user-list-${index}`)}
-                        className='emoji-img'
-                      >{element.emoji}
+                        className={(selectedTab === element.id) ? 'emoji-img active' : 'emoji-img'}
+                      >
+                        <span>{element.emoji}</span>
+                        {/* <span>{console.log(individualReacts[element.id])}{individualReacts[element.id].length}</span> */}
                       </div>
                     )
                   })}

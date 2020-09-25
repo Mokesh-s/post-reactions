@@ -33,15 +33,11 @@ class Summary extends Component {
   }
 
   handleGetDetails () {
-    console.log(this.state.individualReacts)
     this.setState({ isOverlayOpen: true, showLegends: false })
-    // console.log(this.state.userReactList)
   }
 
   handlePostReaction (element) {
     const { userContentReactions, userId, legendTypes } = this.state
-    console.log(element, userContentReactions)
-    // console.log(element, this.state.individualIds, this.state.userContentReactions)
     const newUserContentReaction = {
       id: 1000,
       user_id: userId,
@@ -53,12 +49,10 @@ class Summary extends Component {
     }
     let reactedIcon = ''
     legendTypes && legendTypes.map(legendType => {
-      if (legendType.id === newUserContentReaction.reaction_id) {
-        console.log(newUserContentReaction)
+      if (legendType.id === newUserContentReaction.reaction_id) { // new reactions
         reactedIcon = legendType
       }
-      if (!element && this.state.reactedIcon) {
-        console.log('unliked')
+      if (!element && this.state.reactedIcon) { // unlike
         reactedIcon = ''
       }
     }
@@ -66,11 +60,9 @@ class Summary extends Component {
     if (reactedIcon) userContentReactions.push(newUserContentReaction)
     this.setState({
       userContentReactions: userContentReactions,
-      // legendTypes: '',
       showLegends: false,
       reactedIcon: reactedIcon
     })
-    console.log(reactedIcon)
     // const reqRoute = `user_content_reactions`
     // // const params = newUserContentReaction
     // const params = {
@@ -87,15 +79,11 @@ class Summary extends Component {
   getIndividualReactions () {
     const { reactions, contentId } = this.props
     const { individualIds, individualReacts } = this.state
-    // this.setState({ legendTypes: reactions })
     reactions.map(reaction => { // mapping all the reactions
-      // console.log(reaction)
       const reqRoute = `user_content_reactions?content_id=${contentId}&reaction_id=${reaction.id}`
       fetchData('get', reqRoute, '', 'json').then(response => { // getting individual id responses
-        // console.log(response)
         if (response.length > 0) individualIds.push(reaction)
         individualReacts[reaction.id] = response
-        // console.log(individualIds)
         this.setState({
           individualIds: individualIds,
           individualReacts: individualReacts
@@ -108,7 +96,6 @@ class Summary extends Component {
   getUserContentReactions () {
     const reqRoute = `user_content_reactions?content_id=${this.props.contentId}`
     fetchData('get', reqRoute, '', 'json').then(response => {
-      // console.log(response)
       this.setState({ userContentReactions: response })
     })
   }
@@ -181,17 +168,16 @@ class Summary extends Component {
     // if (legendTypes && reactedIcon) {
     //   reactedIcon = legendTypes.find(element => element.id === reactedIcon.reaction_id)
     // }
-    // console.log(reactedIcon)
     return (
       <div id='summary'>
-        {isOverlayOpen && <Overlay
+        {isOverlayOpen && <Overlay // overlay for details
           individualIds={individualIds}
           individualReacts={individualReacts}
           userReactList={userReactList}
           allUsers={allUsers}
           hideOverlay={this.hideOverlay.bind(this)}
           contentId={contentId}
-                          />}
+          />}
         {
           <div className='post'>
             <div>Content: {this.props.contentId}</div>
@@ -222,8 +208,6 @@ class Summary extends Component {
             <div
               className='box-1'
               ref='box-1'
-              // ref={`reaction-block-${contentId}`}
-              // onMouseOver={() => this.toggleLike(`like-button-${contentId}`)}
               onMouseLeave={() => this.clearLegends(`like-button-${contentId}`)}
             >
               <div ref={`like-button-${contentId}`} className='like-items'>
@@ -231,14 +215,13 @@ class Summary extends Component {
                   <div className='reactions-container'>{
                     legendTypes.map((element, index) => {
                       return (
-                        // <ReactTooltip>
                         <div data-tip={element.name} key={index} className='like-item' onClick={() => this.handlePostReaction(element)}>
                           {element.emoji}
                         </div>
                       )
                     })
                   }
-                  <ReactTooltip />
+                    <ReactTooltip />
                   </div>}
               </div>
               <div
@@ -250,7 +233,7 @@ class Summary extends Component {
                   ? <div>
                     <span>{reactedIcon.emoji}&nbsp;</span>
                     <span>{reactedIcon.name}</span>
-                  </div>
+                    </div>
                   : <span> Like </span>}
               </div>
             </div>
