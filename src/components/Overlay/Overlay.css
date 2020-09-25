@@ -262,7 +262,11 @@
 
 .emoji-img {
   cursor: pointer;
-  padding: 2px;
+  padding: 2px 2px 5px;
+}
+
+.active {
+  border-bottom: 1px solid;
 }
 
 .details {

@@ -95,7 +95,7 @@ class Summary extends Component {
         // console.log(response)
         if (response.length > 0) individualIds.push(reaction)
         individualReacts[reaction.id] = response
-        // console.log(individualIds)
+        console.log(individualReacts)
         this.setState({
           individualIds: individualIds,
           individualReacts: individualReacts
@@ -191,7 +191,7 @@ class Summary extends Component {
           allUsers={allUsers}
           hideOverlay={this.hideOverlay.bind(this)}
           contentId={contentId}
-                          />}
+        />}
         {
           <div className='post'>
             <div>Content: {this.props.contentId}</div>
