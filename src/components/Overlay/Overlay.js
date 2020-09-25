@@ -83,13 +83,11 @@ class Overlay extends Component {
       // userReactList = allUsers
       const reqRoute = `user_content_reactions?content_id=${contentId}`
       fetchData('get', reqRoute, '', 'json').then(response => { // getting individual id responses
-        console.log(response, allUsers)
         if (response.length > 0) {
           response.map((element) => {
             allUsers.map((user) => {
               if (element.user_id === user.id) {
                 userReactList.push(user)
-                console.log(element, user)
               }
             })
           })

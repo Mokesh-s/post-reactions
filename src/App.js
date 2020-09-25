@@ -6,7 +6,7 @@ export default class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      contentId: [1, 2],
+      contentId: [1, 2], // static declaration of content Id's
       reactions: [],
       allUsers: []
     }
@@ -17,7 +17,6 @@ export default class App extends Component {
   getReactions () {
     const reqRoute = 'reactions'
     fetchData('get', reqRoute, '', 'json').then(response => {
-      console.log(response)
       this.setState({ reactions: response })
     })
   }
@@ -25,7 +24,6 @@ export default class App extends Component {
   getUsers () {
     const reqRoute = 'users'
     fetchData('get', reqRoute, '', 'json').then(response => {
-      console.log(response)
       this.setState({ allUsers: response })
     })
   }
@@ -39,7 +37,7 @@ export default class App extends Component {
     const { contentId, reactions, allUsers } = this.state
     return (
       <div id='app'>
-        {contentId.map((element, index) => {
+        {contentId.map((element, index) => { // passing content specific props to the child components
           return (
             <Summary
               key={index} contentId={element} reactions={reactions}
